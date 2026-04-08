@@ -7,6 +7,8 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Freehand&family=Hanuman:wght@400;700&family=Moul&family=Playfair+Display:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Moulpali&display=swap" rel="stylesheet">
+
 
     <style>
         :root {
@@ -71,48 +73,30 @@
         }
 
         .hero-text-wrapper {
-            display: flex; flex-direction: column; align-items: center;
-            width: 100%; transform: translateY(20px); /* Nudge down slightly into frame */
+            display: flex; flex-direction: column; 
+            align-items: center; text-align: center;
+            width: 100%; transform: translateY(20px);
+            z-index: 10;
         }
 
-        /* Update the main desktop names-grid */
+        /* Names Grid - Fixed for Center Ring */
         .names-grid {
             display: grid !important;
             grid-template-columns: 1fr auto 1fr; 
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            max-width: 95%; /* Use percentage so it doesn't hit screen edges */
-            margin: 0 auto;
-            white-space: nowrap; /* CRITICAL: This prevents names from jumping to the next line */
-            
+            align-items: center; justify-content: center;
+            width: 100%; max-width: 900px; margin: 0 auto;
+            white-space: nowrap; 
             font-family: var(--khmer-heading);
             font-size: clamp(1.5rem, 6vw, 3.5rem);
             color: gold;
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
         }
         
-        /* Force the left name to align to the right (towards the ring) */
-        .name-left {
-            text-align: right;
-        }
-
-        /* Force the right name to align to the left (towards the ring) */
-        .name-right {
-            text-align: left;
-        }
-
-        .hero p {
-            color: white;
-            text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
-            margin-top: 15px;
-            max-width: 80%;
-            font-size: clamp(0.9rem, 4vw, 1.2rem);
-        }
+        .name-left { text-align: right; }
+        .name-right { text-align: left; }
 
         .wedding-ring {
-            display: inline-block;
-            padding: 0 15px; /* Space around the ring */
+            display: inline-block; padding: 0 15px; 
             animation: ring-shine 2s infinite ease-in-out;
         }
 
@@ -122,101 +106,103 @@
             100% { transform: scale(1) rotate(-5deg); filter: brightness(1); }
         }
 
-        /* Fixed Thank You Card Section */
-        .thank-you-card {
-            background: white;
-            border-radius: 12px;
-            padding: 40px 30px; /* Added more padding for a cleaner look */
-            box-shadow: inset 0 0 0 10px white;
-            text-align: center; /* This centers all the text inside */
-            max-width: 600px;
-            margin: 40px auto;
-            border: 1px solid #f8f1e0;
+        /* Formal Sections Styling */
+        .formal-title {
+            font-family: var(--khmer-heading);
+            color: var(--gold);
+            font-size: clamp(1.2rem, 4vw, 2.2rem);
+            margin-bottom: 20px;
         }
 
-        .thank-you-card h2 { 
-            font-family: var(--khmer-heading); 
-            color: var(--gold); 
-            margin-bottom: 10px; 
-            font-size: 1.8rem;
+        .parents-grid {
+            display: flex; justify-content: space-between;
+            width: 90%; max-width: 800px; margin-bottom: 30px;
         }
 
-        .thank-you-card .heart { 
-            color: #e7a3a3; 
-            font-size: 2rem; 
-            margin-bottom: 15px; 
+        .parents-left, .parents-right {
+            font-size: clamp(0.7rem, 2vw, 1rem);
+            line-height: 1.6; color: #444; flex: 1;
+        }
+        .parents-right { text-align: right; }
+        .parents-left { text-align: left; }
+
+        .formal-message {
+            margin: 0 auto 25px auto; max-width: 85%;
+            display: flex; flex-direction: column; align-items: center;
+            font-family: "Moulpali", sans-serif;
+            font-weight: 400;
+            font-style: normal;
         }
 
-        .thank-you-card p { 
-            font-size: 1.1rem; 
-            color: #555; 
-            line-height: 1.8; 
-            margin: 10px 0;
+        .khmer-call {
+            font-family: var(--khmer-heading);
+            color: var(--gold-dark); text-decoration: underline; margin-bottom: 10px;
         }
 
-        .thank-you-card .names { 
-            font-family: var(--khmer-heading); 
-            font-size: 1.3rem; 
-            color: var(--gold); 
-            margin-top: 25px; 
+        .main-text {
+            font-size: clamp(0.75rem, 1.8vw, 0.95rem);
+            line-height: 1.8; text-align: center;
         }
 
-        /* Rest of UI */
+        .event-details {
+            display: flex; flex-direction: column; align-items: center;
+            margin-top: 20px; width: 100%;
+        }
+
+        .event-details p { margin: 5px 0; color: #333; }
+        .highlight-date {
+            font-weight: bold; color: var(--gold-dark); font-size: 1.1rem;
+        }
+
+        /* UI Cards */
         .content-section { padding: 40px 20px; max-width: 700px; margin: auto; position: relative; z-index: 60; }
-       .elegant-card {
-    background: white;
-    padding: 30px;
-
-}
+        .elegant-card { background: white; padding: 30px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
         .info-row { display: flex; justify-content: space-between; padding: 15px 0; border-top: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; font-size: 0.95rem; }
         .map-wrapper { height: 300px; border-radius: 12px; overflow: hidden; margin-bottom: 20px; }
         iframe { width: 100%; height: 100%; border: 0; }
         .gold-btn { display: block; background: var(--gold); color: white; text-align: center; padding: 14px; border-radius: 10px; text-decoration: none; font-weight: bold; }
-        #music-control { position: fixed; bottom: 20px; right: 20px; z-index: 999; background: var(--white); width: 50px; height: 50px; border-radius: 50%; display: none; align-items: center; justify-content: center; cursor: pointer; }
+        
+        .thank-you-card {
+            background: white; border-radius: 12px; padding: 40px 30px;
+            box-shadow: inset 0 0 0 10px white;
+            text-align: center; max-width: 600px; margin: 40px auto; border: 1px solid #f8f1e0;
+        }
+        .thank-you-card .heart { color: #e7a3a3; font-size: 2rem; margin-bottom: 10px; }
+        .thank-you-card .names { font-family: var(--khmer-heading); color: var(--gold); margin-top: 25px; }
+
+        #music-control { position: fixed; bottom: 20px; right: 20px; z-index: 999; background: var(--white); width: 50px; height: 50px; border-radius: 50%; display: none; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         footer { text-align: center; padding: 40px; font-size: 0.8rem; color: #999; }
 
-       @media (max-width: 768px) {
+        /* --- MOBILE FIXES --- */
+        @media (max-width: 768px) {
             .hero {
-                position: relative;
-                overflow: hidden;
-                background-image: none !important; /* Hide the non-rotated image */
-                background-color: #f7f1e4; /* Fallback color */
+                background-image: none !important;
+                background-color: #f7f1e4;
             }
 
             .hero::before {
-                content: "";
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                
-                /* 1. Use the EXACT same image name as your desktop CSS */
+                content: ""; position: absolute; top: 50%; left: 50%;
                 background-image: url('bg.webp'); 
-                
-                /* 2. Make this layer much larger than the screen so rotation doesn't show edges */
-                width: 150vh; 
-                height: 150vw;
-                
-                background-size: cover;
-                background-position: center;
-                background-repeat: no-repeat;
-                
-                /* 3. Center the layer and rotate it */
+                width: 150vh; height: 150vw;
+                background-size: cover; background-position: center;
                 transform: translate(-50%, -50%) rotate(90deg);
                 z-index: 1;
             }
 
-            .hero-text-wrapper {
-                position: relative;
-                z-index: 10; /* Put text on top of the rotated image */
-                width: 100%;
-                padding: 0 10px;
-            }
+            .hero-text-wrapper { padding: 0 15px; }
 
-            .names-grid {
-                font-size: 1.2rem !important;
-                white-space: nowrap;
+            .names-grid { 
+                font-size: 1.1rem !important; 
+                gap: 5px !important;
                 width: 100%;
             }
+            .wedding-ring { padding: 0 5px; font-size: 1rem; }
+
+            .parents-grid { width: 100%; gap: 10px; }
+            .parents-left, .parents-right { font-size: 0.65rem; text-align: center; }
+            
+            .formal-title { font-size: 1.1rem; }
+            .main-text { font-size: 0.75rem; line-height: 1.5; }
         }
     </style>
 </head>
@@ -227,7 +213,7 @@
     <div id="splash-screen">
         <h1 style="font-family: 'Moul', serif;">សិរីមង្គលពិធីភ្ជាប់ពាក្យ</h1>
         <p>សាន់ហ្វាន់ និង រិទ្ធរីតា</p>
-        <button class="open-btn" onclick="openInvitation()">បើកសំបុត្រអញ្ជើញ</button>
+        <button class="open-btn" onclick="openInvitation()">បើកធៀប</button>
     </div>
 
     <audio id="bg-music" loop>
@@ -239,16 +225,40 @@
     <div id="main-content" style="display: none;">
         
         <section class="hero">
-    <div class="hero-text-wrapper">
-        <h1 class="names-grid" data-aos="zoom-in">
-            <span class="name-left">ថាម សាន់ហ្វាន់</span>
-            <span class="wedding-ring">💍</span>
-            <span class="name-right">ម៉ែន រិទ្ធរីតា</span>
-        </h1>
-        <p data-aos="fade-up">ថ្ងៃអាទិត្យ ទី ១២ ខែ មេសា ឆ្នាំ ២០២៦ វេលាម៉ោង​​ ៨ ព្រឹក</p>
-        <p data-aos="fade-up">គេហដ្ឋានខាងស្រី ភូមិដំណាក់ សង្កាត់គោកឃ្លាង ខណ្ឌសែនសុខ រាជធានីភ្នំពេញ</p>
-    </div>
-</section>
+            <div class="hero-text-wrapper">
+                <h2 class="formal-title" data-aos="fade-down">សិរីមង្គលពិធីភ្ជាប់ពាក្យ</h2>
+
+                <div class="parents-grid" data-aos="fade-up">
+                    <div class="parents-left">
+                        <p>លោក ថាម ជីវ៉ា</p>
+                        <p>លោកស្រី អុឹង សុលីណា</p>
+                    </div>
+                    <div class="parents-right">
+                        <p>លោក ម៉ែន ខែមរិទ្ធ</p>
+                        <p>លោកស្រី ខៀវ ប៉ុណ្ណារី</p>
+                    </div>
+                </div>
+
+                <div class="formal-message" data-aos="fade-up">
+                    <p class="khmer-call">សូមគោរពអញ្ជើញ</p>
+                    <p class="main-text">
+                        ឯកឧត្តម អ្នកឧកញ៉ា លោកឧកញ៉ា លោកជំទាវ លោក លោកស្រី អ្នកនាងកញ្ញា អញ្ជើញចូលរួមជាអធិបតីភាព និងជាភ្ញៀវកិត្តិយស ក្នុងកម្មវិធីសិរីមង្គលពិធីភ្ជាប់ពាក្យ កូនប្រុស កូនស្រី របស់យើងខ្ញុំទាំងពីរ។
+                    </p>
+                </div>
+
+                <h1 class="names-grid" data-aos="zoom-in">
+                    <span class="name-left">ថាម សាន់ហ្វាន់</span>
+                    <span class="wedding-ring">💍</span>
+                    <span class="name-right">ម៉ែន រិទ្ធរីតា</span>
+                </h1>
+
+                <div class="event-details" data-aos="fade-up">
+                    <p>ដែលនឹងប្រព្រឹត្តទៅនៅ</p>
+                    <p class="highlight-date">ថ្ងៃអាទិត្យ ទី១២ ខែមេសា ឆ្នាំ២០២៦</p>
+                    <p>ស្ថិតនៅ ភូមិដំណាក់ សង្កាត់គោកឃ្លាង ខណ្ឌសែនសុខ រាជធានីភ្នំពេញ</p>
+                </div>
+            </div>
+        </section>
 
         <section class="content-section">
             <div class="elegant-card" data-aos="fade-up">
@@ -266,13 +276,13 @@
                 </div>
 
                 <div class="map-wrapper">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d732.0636736012457!2d104.85039846338124!3d11.56970244666104!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTHCsDM0JzEwLjciTiAxMDTCsDUwJzU5LjYiRQ!5e0!3m2!1sen!2skh!4v1775612128026!5m2!1sen!2skh" allowfullscreen="" loading="lazy"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3908.573489814421!2d104.8582236!3d11.5824244!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTHCsDM0JzU2LjciTiAxMDTCsDUxJzI5LjYiRQ!5e0!3m2!1sen!2skh!4v1620000000000!5m2!1sen!2skh" allowfullscreen="" loading="lazy"></iframe>
                 </div>
 
-                <a href="https://maps.app.goo.gl/TwzgWmftifoLsL4c6" target="_blank" class="gold-btn">បើកមើលផែនទី (Open Maps)</a>
+                <a href="https://maps.google.com" target="_blank" class="gold-btn">បើកមើលផែនទី (Open Maps)</a>
             </div>
 
-           <div class="thank-you-card" data-aos="fade-up">
+            <div class="thank-you-card" data-aos="fade-up">
                 <div class="heart">♡</div>
                 <h2>សូមអរគុណ</h2>
                 <p>Thank You</p>
@@ -295,11 +305,9 @@
             const flower = document.createElement('div');
             flower.className = 'sunflower';
             flower.innerText = '🌻';
-            
             flower.style.left = Math.random() * 100 + 'vw';
             flower.style.animationDuration = (Math.random() * 10 + 15) + 's'; 
             flower.style.fontSize = (Math.random() * 8 + 10) + 'px'; 
-            
             overlay.appendChild(flower);
             flower.addEventListener('animationend', () => flower.remove());
         }
@@ -320,9 +328,7 @@
                 document.getElementById("main-content").style.display = "block";
                 document.getElementById("music-control").style.display = "flex";
                 music.play().catch(e => console.log(e));
-                
                 startFlowers();
-                
                 AOS.refresh();
             }, 1000);
         }
