@@ -27,7 +27,7 @@
             scroll-behavior: smooth;
         }
 
-        /* --- NEW: Elegant, Slow Sunflower Drift --- */
+        /* --- Elegant, Slow Sunflower Drift --- */
         .sunflower-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none; z-index: 50; overflow: hidden;
@@ -37,8 +37,8 @@
             position: absolute;
             user-select: none;
             animation: gentle-drift linear forwards;
-            opacity: 0.4; /* Soft and faded */
-            filter: blur(0.5px); /* Makes it look slightly out of focus in the background */
+            opacity: 0.4;
+            filter: blur(0.5px); 
         }
 
         @keyframes gentle-drift {
@@ -68,43 +68,60 @@
             background: var(--gold-dark); transform: scale(1.05);
         }
 
-        /* 1. Base style with a subtle dark center to help text pop */
+        /* 1. FIX THE BACKGROUND IMAGE */
         .hero {
             height: 100vh;
-            /* The radial-gradient adds a soft dark shadow ONLY in the middle behind the text */
-            background:  
-                        url('2.jpg');
-            background-size: cover;
+            width: 100%;
+            
+            /* This color perfectly matches the cream background of your new image */
+            background-color: #f5f4e6; 
+            
+            /* Put your new image name here */
+            background-image: url('2.jpg'); 
+            
+            /* MAGIC FIX: 'contain' ensures the borders are never cut off on PC or Mobile */
+            background-size: contain; 
             background-position: center;
-            display: flex; flex-direction: column; justify-content: center;
-            align-items: center; text-align: center;
-            padding: 20px;
+            background-repeat: no-repeat;
+            
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center;
+            align-items: center; 
+            text-align: center;
         }
 
-        /* 2. Main names with a sharp, crisp shadow (No blur!) */
+        /* 2. RESET THE TEXT POSITION */
+        .hero-text-wrapper {
+            /* Set this to 0! Your new image has the box perfectly in the middle, 
+               so we don't need to push the text down anymore. */
+            transform: translateY(0); 
+            
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            z-index: 10;
+        }
+
         .hero h1 {
             font-family: var(--khmer-heading);
             font-size: clamp(2.5rem, 8vw, 4rem);
             margin: 0;
+            color: #C29D59; /* Matching the gold of your frame */
             
-            /* Bright Gold */
-            color: #D4AF37; 
-            
-            /* A hard, dark shadow that lifts the text off the pattern cleanly */
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.95);
+            /* Changed to a softer, cleaner shadow for your light background */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15), 
+                         -1px -1px 0px rgba(255, 255, 255, 0.8);
         }
 
-        /* 3. Subtext made larger and easier to read */
         .hero p {
-            /* Increased the size dramatically */
             font-size: clamp(1.2rem, 5vw, 1.8rem);
             margin-top: 15px;
+            color: #7a6642; /* A dark gold/brown that is easy to read */
             
-            /* Changed to a light cream color to contrast against the dark pattern */
-            color: #FFF9E6; 
-            
-            /* Same hard, dark shadow */
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.95);
+            /* Clean, soft shadow */
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
             letter-spacing: 1px;
         }
 
@@ -155,9 +172,10 @@
         /* Beating Heart Animation */
         .beating-heart {
             display: inline-block;
-            color: #e63946; /* A beautiful, elegant red. You can change this to gold (#D4AF37) if you prefer! */
+            color: #e63946; 
             animation: heartbeat 1.5s infinite;
-            margin: 0 10px; /* Gives a little breathing room between the names */
+            /* PERFECTLY EVEN HORIZONTAL MARGINS */
+            margin: 0 15px; 
         }
 
         @keyframes heartbeat {
@@ -192,8 +210,10 @@
     <div id="main-content" style="display: none;">
         
         <section class="hero">
-            <h1 data-aos="zoom-in">សាន់ហ្វាន់ <span class="beating-heart">♥</span>រីតា</h1>
-            <p data-aos="fade-up">រីករាយពិធីភ្ជាប់ពាក្យ</p>
+            <div class="hero-text-wrapper">
+                <h1 data-aos="zoom-in">សាន់ហ្វាន់<span class="beating-heart">♥</span>រីតា</h1>
+                <p data-aos="fade-up">រីករាយពិធីភ្ជាប់ពាក្យ</p>
+            </div>
         </section>
 
         <section class="content-section">
@@ -236,34 +256,24 @@
     <script>
         AOS.init({ duration: 1000, once: true });
 
-        // --- NEW: Single, Slow Flower Spawn ---
         function createSunflower() {
             const overlay = document.getElementById('overlay');
             const flower = document.createElement('div');
             flower.className = 'sunflower';
             flower.innerText = '🌻';
             
-            // Random horizontal start position
             flower.style.left = Math.random() * 100 + 'vw';
-            
-            // Very slow falling duration (15 to 25 seconds)
             flower.style.animationDuration = (Math.random() * 10 + 15) + 's'; 
-            
-            // Much smaller sizes (10px to 18px)
             flower.style.fontSize = (Math.random() * 8 + 10) + 'px'; 
             
             overlay.appendChild(flower);
-            
-            // Cleanup when it reaches the bottom
             flower.addEventListener('animationend', () => flower.remove());
         }
 
-        // --- Start the animation loop ---
         let flowerLoop;
         function startFlowers() {
-            createSunflower(); // Spawn the first one immediately
-            setTimeout(createSunflower, 2500); // Spawn a second one 2.5s later
-            // Then continuously spawn 1 flower every 5 seconds
+            createSunflower(); 
+            setTimeout(createSunflower, 2500); 
             flowerLoop = setInterval(createSunflower, 5000); 
         }
 
@@ -277,7 +287,6 @@
                 document.getElementById("music-control").style.display = "flex";
                 music.play().catch(e => console.log(e));
                 
-                // Trigger the slow flower animation here
                 startFlowers();
                 
                 AOS.refresh();
