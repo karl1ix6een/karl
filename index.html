@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engagement Invitation - ពិធីភ្ជាប់ពាក្យ</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Freehand&family=Hanuman:wght@400;700&family=Moul&family=Playfair+Display:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --gold: #c29d59;
+            --gold-dark: #a68446;
+            --cream: #fdfaf0;
+            --white: #ffffff;
+            --dark-text: #4a4a4a;
+            --khmer-font: 'Hanuman', serif;
+            --khmer-heading: 'Moul', serif;
+        }
+
+        body, html {
+            margin: 0; padding: 0; overflow-x: hidden;
+            background-color: var(--cream);
+            color: var(--dark-text);
+            font-family: var(--khmer-font);
+            scroll-behavior: smooth;
+        }
+
+        /* --- NEW: Elegant, Slow Sunflower Drift --- */
+        .sunflower-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 50; overflow: hidden;
+        }
+
+        .sunflower {
+            position: absolute;
+            user-select: none;
+            animation: gentle-drift linear forwards;
+            opacity: 0.4; /* Soft and faded */
+            filter: blur(0.5px); /* Makes it look slightly out of focus in the background */
+        }
+
+        @keyframes gentle-drift {
+            0% { transform: translateY(-5vh) translateX(0) rotate(0deg); opacity: 0; }
+            15% { opacity: 0.4; }
+            85% { opacity: 0.4; }
+            100% { transform: translateY(105vh) translateX(60px) rotate(200deg); opacity: 0; }
+        }
+
+        /* Splash Screen */
+        #splash-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--white); z-index: 1000;
+            display: flex; flex-direction: column; justify-content: center;
+            align-items: center; text-align: center; transition: opacity 1s ease;
+        }
+
+        .open-btn {
+            background: var(--gold); color: white; border: none;
+            padding: 15px 40px; font-size: 1.2rem; border-radius: 50px;
+            cursor: pointer; margin-top: 25px; font-family: var(--khmer-font);
+            box-shadow: 0 4px 15px rgba(194, 157, 89, 0.4);
+            transition: 0.3s;
+        }
+
+        .open-btn:hover {
+            background: var(--gold-dark); transform: scale(1.05);
+        }
+
+        /* 1. Base style with a subtle dark center to help text pop */
+        .hero {
+            height: 100vh;
+            /* The radial-gradient adds a soft dark shadow ONLY in the middle behind the text */
+            background: radial-gradient(circle at center, rgba(20, 25, 40, 0.7) 0%, rgba(20, 25, 40, 0) 65%), 
+                        url('bg.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex; flex-direction: column; justify-content: center;
+            align-items: center; text-align: center;
+            padding: 20px;
+        }
+
+        /* 2. Main names with a sharp, crisp shadow (No blur!) */
+        .hero h1 {
+            font-family: var(--khmer-heading);
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            margin: 0;
+            
+            /* Bright Gold */
+            color: #D4AF37; 
+            
+            /* A hard, dark shadow that lifts the text off the pattern cleanly */
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.95);
+        }
+
+        /* 3. Subtext made larger and easier to read */
+        .hero p {
+            /* Increased the size dramatically */
+            font-size: clamp(1.2rem, 5vw, 1.8rem);
+            margin-top: 15px;
+            
+            /* Changed to a light cream color to contrast against the dark pattern */
+            color: #FFF9E6; 
+            
+            /* Same hard, dark shadow */
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.95);
+            letter-spacing: 1px;
+        }
+
+        /* Card Styling */
+        .content-section { padding: 40px 20px; max-width: 700px; margin: auto; position: relative; z-index: 60; }
+        
+        .elegant-card {
+            background: var(--white); border-radius: 16px; padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: left;
+            border: 1px solid #f0e6cc; position: relative; margin-bottom: 40px;
+        }
+
+        /* Thank You Section */
+        .thank-you-card {
+            background: var(--white); border-radius: 12px; padding: 40px 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center;
+            max-width: 500px; margin: 40px auto; border: 1px solid #f8f1e0;
+        }
+
+        .thank-you-card h2 { font-family: var(--khmer-heading); color: var(--gold); margin-bottom: 5px; }
+        .thank-you-card .heart { color: #e7a3a3; font-size: 2rem; margin-bottom: 10px; }
+        .thank-you-card p { font-size: 0.95rem; color: #666; line-height: 1.6; }
+        .thank-you-card .names { font-family: var(--khmer-heading); font-size: 1.2rem; color: var(--gold); margin-top: 15px; }
+
+        .info-row {
+            display: flex; justify-content: space-between; padding: 15px 0;
+            border-top: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0;
+            font-size: 0.95rem; margin: 15px 0;
+        }
+
+        .map-wrapper { height: 300px; border-radius: 12px; overflow: hidden; margin-bottom: 20px; }
+        iframe { width: 100%; height: 100%; border: 0; }
+
+        .gold-btn {
+            display: block; background: var(--gold); color: white;
+            text-align: center; padding: 14px; border-radius: 10px;
+            text-decoration: none; font-weight: bold;
+        }
+
+        /* Music Controls */
+        #music-control {
+            position: fixed; bottom: 20px; right: 20px; z-index: 999;
+            background: var(--white); width: 50px; height: 50px; border-radius: 50%;
+            display: none; align-items: center; justify-content: center;
+            cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Beating Heart Animation */
+        .beating-heart {
+            display: inline-block;
+            color: #e63946; /* A beautiful, elegant red. You can change this to gold (#D4AF37) if you prefer! */
+            animation: heartbeat 1.5s infinite;
+            margin: 0 10px; /* Gives a little breathing room between the names */
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            15% { transform: scale(1.25); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.25); }
+            50% { transform: scale(1); }
+            100% { transform: scale(1); }
+        }
+
+        footer { text-align: center; padding: 40px; font-size: 0.8rem; color: #999; }
+
+    </style>
+</head>
+<body>
+
+    <div class="sunflower-overlay" id="overlay"></div>
+
+    <div id="splash-screen">
+        <h1 style="font-family: 'Moul', serif;">ពិធីភ្ជាប់ពាក្យ</h1>
+        <p>សានហ្វាន់ និង រីតា</p>
+        <button class="open-btn" onclick="openInvitation()">បើកសំបុត្រអញ្ជើញ</button>
+    </div>
+
+    <audio id="bg-music" loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="music-control" onclick="toggleMusic()">🎵</div>
+
+    <div id="main-content" style="display: none;">
+        
+        <section class="hero">
+            <h1 data-aos="zoom-in">សាន់ហ្វាន់ <span class="beating-heart">♥</span>រីតា</h1>
+            <p data-aos="fade-up">រីករាយពិធីភ្ជាប់ពាក្យ</p>
+        </section>
+
+        <section class="content-section">
+            <div class="elegant-card" data-aos="fade-up">
+                <div style="display: flex; align-items: flex-start; gap: 15px;">
+                    <div style="background: #fff9e6; color: var(--gold); padding: 12px; border-radius: 50%; font-size: 1.5rem;">📍</div>
+                    <div>
+                        <h2 style="margin:0; font-family: 'Moul', serif; font-size: 1.4rem;">ទីតាំងពិធី</h2>
+                        <p style="margin:4px 0; color: var(--gold); font-weight: 700;">Location</p>
+                    </div>
+                </div>
+
+                <div class="info-row">
+                    <span>🕒 ចាប់ផ្ដើមម៉ោង: <strong>៨:០០ ព្រឹក</strong></span>
+                    <span>📅 ថ្ងៃ <strong>អាទិត្យ ទី​ ១២ មេសា ២០២៦</strong></span>
+                </div>
+
+                <div class="map-wrapper">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d732.0636736012457!2d104.85039846338124!3d11.56970244666104!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTHCsDM0JzEwLjciTiAxMDTCsDUwJzU5LjYiRQ!5e0!3m2!1sen!2skh!4v1775612128026!5m2!1sen!2skh" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+
+                <a href="https://maps.app.goo.gl/TwzgWmftifoLsL4c6" target="_blank" class="gold-btn">បើកមើលផែនទី (Open Maps)</a>
+            </div>
+
+            <div class="thank-you-card" data-aos="fade-up">
+                <div class="heart">♡</div>
+                <h2>សូមអរគុណ</h2>
+                <p>Thank You</p>
+                <p style="margin-top: 15px;">Your presence at our engagement would be the greatest gift of all. We look forward to celebrating with you!</p>
+                <div class="names">សាន់ហ្វាន់ & រីតា</div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Built with ❤️ by Sanfann&Rita</p>
+        </footer>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+
+        // --- NEW: Single, Slow Flower Spawn ---
+        function createSunflower() {
+            const overlay = document.getElementById('overlay');
+            const flower = document.createElement('div');
+            flower.className = 'sunflower';
+            flower.innerText = '🌻';
+            
+            // Random horizontal start position
+            flower.style.left = Math.random() * 100 + 'vw';
+            
+            // Very slow falling duration (15 to 25 seconds)
+            flower.style.animationDuration = (Math.random() * 10 + 15) + 's'; 
+            
+            // Much smaller sizes (10px to 18px)
+            flower.style.fontSize = (Math.random() * 8 + 10) + 'px'; 
+            
+            overlay.appendChild(flower);
+            
+            // Cleanup when it reaches the bottom
+            flower.addEventListener('animationend', () => flower.remove());
+        }
+
+        // --- Start the animation loop ---
+        let flowerLoop;
+        function startFlowers() {
+            createSunflower(); // Spawn the first one immediately
+            setTimeout(createSunflower, 2500); // Spawn a second one 2.5s later
+            // Then continuously spawn 1 flower every 5 seconds
+            flowerLoop = setInterval(createSunflower, 5000); 
+        }
+
+        const music = document.getElementById("bg-music");
+
+        function openInvitation() {
+            document.getElementById("splash-screen").style.opacity = "0";
+            setTimeout(() => {
+                document.getElementById("splash-screen").style.display = "none";
+                document.getElementById("main-content").style.display = "block";
+                document.getElementById("music-control").style.display = "flex";
+                music.play().catch(e => console.log(e));
+                
+                // Trigger the slow flower animation here
+                startFlowers();
+                
+                AOS.refresh();
+            }, 1000);
+        }
+
+        function toggleMusic() {
+            music.paused ? music.play() : music.pause();
+        }
+    </script>
+</body>
+</html>
