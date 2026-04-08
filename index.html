@@ -175,23 +175,47 @@
         #music-control { position: fixed; bottom: 20px; right: 20px; z-index: 999; background: var(--white); width: 50px; height: 50px; border-radius: 50%; display: none; align-items: center; justify-content: center; cursor: pointer; }
         footer { text-align: center; padding: 40px; font-size: 0.8rem; color: #999; }
 
-       /* Update the Mobile section at the bottom of your CSS */
-        @media (max-width: 768px) {
-            .names-grid { 
-                /* We make the font smaller specifically for phones to fit the row */
-                font-size: 1.3rem !important; 
-                gap: 5px !important; 
-                width: 100vw;
-            }
-            
-            .wedding-ring {
-                font-size: 1.2rem; /* Make ring slightly smaller to match */
-                padding: 0 5px; 
+       @media (max-width: 768px) {
+            .hero {
+                position: relative;
+                overflow: hidden;
+                background-image: none !important; /* Hide the non-rotated image */
+                background-color: #f7f1e4; /* Fallback color */
             }
 
-            .hero p { 
-                font-size: 0.85rem; 
-                width: 90%; /* Keep text from hitting phone edges */
+            .hero::before {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                
+                /* 1. Use the EXACT same image name as your desktop CSS */
+                background-image: url('bg.webp'); 
+                
+                /* 2. Make this layer much larger than the screen so rotation doesn't show edges */
+                width: 150vh; 
+                height: 150vw;
+                
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                
+                /* 3. Center the layer and rotate it */
+                transform: translate(-50%, -50%) rotate(90deg);
+                z-index: 1;
+            }
+
+            .hero-text-wrapper {
+                position: relative;
+                z-index: 10; /* Put text on top of the rotated image */
+                width: 100%;
+                padding: 0 10px;
+            }
+
+            .names-grid {
+                font-size: 1.2rem !important;
+                white-space: nowrap;
+                width: 100%;
             }
         }
     </style>
@@ -237,7 +261,7 @@
                 </div>
 
                 <div class="info-row">
-                    <span>🕒 ចាប់ផ្ដើមម៉ោង: <strong>៨:០០ ព្រឹក</strong></span>
+                    <span>🕒 វេលាម៉ោង: <strong>៨:០០ ព្រឹក</strong></span>
                     <span>📅 ថ្ងៃ <strong>អាទិត្យ ទី​ ១២ មេសា ២០២៦</strong></span>
                 </div>
 
